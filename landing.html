@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        document.title = "GoodHand Security Products Corp. - Home";
+        window.currentPageId = 'home';
+    </script>
+    <!-- Dependencies are loaded via header.html content injection -->
+    <link rel="stylesheet" href="puihaha.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-gray-50 to-gray-100">
+    <div id="header-placeholder"></div>
+    <main class="w-full">
+
+        <!-- Hero Section with Gradient Background -->
+        <section class="relative overflow-hidden bg-secondary py-24 sm:py-32 text-white">
+            <!-- Animated Background Pattern -->
+            <div class="absolute inset-0 opacity-20">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" stroke-width="0.5"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100" height="100" fill="url(#grid)" />
+                </svg>
+            </div>
+            <!-- Subtle dark overlay to ensure consistent text contrast across the gradient background -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent pointer-events-none"></div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-8">
+                <div class="text-center space-y-6">
+                    <div class="inline-block px-4 py-2 bg-cta-red/20 rounded-full border border-cta-red/50">
+                        <p class="text-sm font-bold text-cta-yellow uppercase tracking-wider">Security Excellence Since 2005</p>
+                    </div>
+                    
+                    <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight drop-shadow-lg">
+                        RAISE THE BAR OF<br><span class="text-cta-yellow animate-pulse">SAFETY AND SECURITY</span>
+                    </h1>
+                    
+                    <p class="mt-6 text-lg sm:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow">
+                        20 Years in the Industry. We provide high-quality, reliable security equipment designed for your peace of mind.
+                    </p>
+                    
+                    <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                        <a href="catalog.html" class="inline-flex items-center justify-center px-10 py-4 bg-cta-red hover:bg-red-700 text-white font-black rounded-full shadow-2xl transition duration-300 transform hover:scale-105 uppercase text-lg">
+                            <i class="fa-solid fa-box-open mr-3"></i> View Catalog
+                        </a>
+                        <button id="home-advisor-cta" class="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white font-black rounded-full bg-transparent hover:bg-white hover:text-secondary transition duration-300 shadow-2xl uppercase text-lg">
+                            <i class="fa-solid fa-search mr-3"></i> Find Your System
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Proposition Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-8 py-20">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: Experience -->
+                <div class="group bg-white p-8 rounded-2xl shadow-lg border-b-4 border-cta-red transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-cta-red rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-crown text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-secondary mb-3">20+ Years Experience</h3>
+                    <p class="text-gray-600 leading-relaxed">A leading provider with two decades of expertise. We offer complete peace of mind through reliable surveillance systems trusted by thousands.</p>
+                </div>
+
+                <!-- Card 2: Support -->
+                <div class="group bg-white p-8 rounded-2xl shadow-lg border-b-4 border-cta-red transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-secondary rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-headset text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-secondary mb-3">Expert Support</h3>
+                    <p class="text-gray-600 leading-relaxed">Reliable products backed by excellent after-sales technical support from our expert team, ensuring system longevity and optimal performance.</p>
+                </div>
+
+                <!-- Card 3: One Stop Shop -->
+                <div class="group bg-white p-8 rounded-2xl shadow-lg border-b-4 border-cta-red transform hover:scale-105 transition duration-300 hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-cta-red rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-store text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-secondary mb-3">Complete Solutions</h3>
+                    <p class="text-gray-600 leading-relaxed">We provide a full range of products and services for all your security needs—home, office, or warehouse—in one convenient place.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="bg-secondary text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+                <h2 class="text-4xl font-extrabold text-center mb-16">Why Choose GoodHand?</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="flex flex-col items-center text-center space-y-4">
+                        <div class="w-14 h-14 bg-cta-red rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-check text-xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Premium Quality</h4>
+                        <p class="text-white text-sm leading-relaxed">Industry-leading products with international standards</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center space-y-4">
+                        <div class="w-14 h-14 bg-cta-red rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-bolt text-xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Fast Delivery</h4>
+                        <p class="text-white text-sm leading-relaxed">Quick installation and delivery services</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center space-y-4">
+                        <div class="w-14 h-14 bg-cta-red rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Warranty</h4>
+                        <p class="text-white text-sm leading-relaxed">Comprehensive warranty and protection</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center space-y-4">
+                        <div class="w-14 h-14 bg-cta-red rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-phone text-xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">24/7 Support</h4>
+                        <p class="text-white text-sm leading-relaxed">Round-the-clock customer service</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+                <h2 class="text-4xl font-extrabold mb-6">Ready to Secure Your Property?</h2>
+                <p class="text-xl text-gray-300 mb-10">Let our security advisors help you find the perfect system for your needs.</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button id="home-advisor-cta-2" class="inline-flex items-center justify-center px-10 py-4 bg-cta-red hover:bg-red-700 text-white font-black rounded-full transition duration-300 transform hover:scale-105 uppercase text-lg shadow-lg">
+                        <i class="fa-solid fa-robot mr-3"></i> Start Smart Advisor
+                    </button>
+                    <a href="inquire.html" class="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white font-black rounded-full bg-transparent hover:bg-white hover:text-secondary transition duration-300 uppercase text-lg">
+                        <i class="fa-solid fa-envelope mr-3"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="puihaha.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSharedContent('header.html', 'header-placeholder', () => {
+                loadSharedContent('footer.html', 'footer-placeholder');
+                const currentPageId = window.currentPageId || 'other';
+                if (window.LogicDrivenApp && currentPageId) {
+                    window.appInstance = new LogicDrivenApp(currentPageId); 
+                }
+            });
+            
+            // Attach second CTA button handler
+            const advisorCta2 = document.getElementById('home-advisor-cta-2');
+            if (advisorCta2) {
+                advisorCta2.addEventListener('click', () => {
+                    if (window.appInstance) {
+                        window.appInstance.showAdvisorModal();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
