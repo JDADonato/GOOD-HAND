@@ -1,0 +1,63 @@
+<div id="product-detail-modal" class="modal-overlay hidden"></div>
+    
+    <div id="inquiry-form-modal" class="modal-overlay hidden"></div>
+    
+    <div id="advisor-modal" class="modal-overlay hidden">
+        <div id="advisor-grid-area" class="modal-content-lg bg-white p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 space-y-6">
+                <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                    <h3 id="current-step-title" class="text-3xl font-extrabold text-secondary">Step 1: Get Started</h3>
+                    <button data-modal-action="close" data-target="advisor-modal" class="close-button text-gray-500 hover:text-cta-red">×</button>
+                </div>
+                
+                <div id="quiz-container" class="space-y-4">
+                    <p class="text-center text-gray-500">Loading quiz...</p>
+                </div>
+                
+                <div id="results-container" class="hidden">
+                    <h4 class="text-2xl font-bold text-cta-red mb-3">✅ Your Recommended Security System</h4>
+                    <p id="recommendation-message" class="text-gray-600 mb-4"></p>
+                    <div id="results-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        </div>
+                </div>
+
+                <div class="flex justify-between pt-4 border-t-2 border-gray-200">
+                    <button id="back-button" data-action="back" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition font-semibold">
+                        <i class="fas fa-arrow-left mr-2"></i> Go Back
+                    </button>
+                    <button data-action="reset" class="bg-cta-red text-white px-6 py-2 rounded-lg hover:bg-red-700 transition font-semibold">
+                        <i class="fas fa-redo mr-2"></i> Reset Quiz
+                    </button>
+                </div>
+            </div>
+            
+            <div class="md:col-span-1 bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg shadow-inner border border-gray-200">
+                <h4 class="text-xl font-bold text-primary mb-3 border-b-2 border-secondary pb-2 flex items-center">
+                    <i class="fas fa-star text-cta-red mr-2"></i> Live Recommendations (<span id="match-count">0</span>)
+                </h4>
+                <div id="filter-badges" class="flex flex-wrap gap-2 text-sm mb-4">
+                    </div>
+                <div id="live-product-list" class="space-y-3 max-h-96 overflow-y-auto scroll-hidden">
+                    <p class="text-sm text-gray-500">Answer Step 1 to see live results.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <img class="h-12 w-auto" src="https://goodhand88.com/wp-content/uploads/2022/09/Group-81.png.webp" alt="GoodHand Security Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x40/0e2378/ffffff?text=GHSP';">
+                    <span class="text-primary text-xl font-black ml-3 hidden md:block">GHSP Corp.</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="landing.html" data-nav="home" class="nav-link text-primary font-medium hover:text-cta-red transition duration-300">HOME</a>
+                    <a href="catalog.html" data-nav="products" class="nav-link text-primary font-medium hover:text-cta-red transition duration-300">PRODUCTS & ADVISOR</a>
+                    <a href="inquire.html" data-nav="contact" class="nav-link text-primary font-medium hover:text-cta-red transition duration-300">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
