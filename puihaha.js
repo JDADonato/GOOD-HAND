@@ -550,14 +550,43 @@ class LogicDrivenApp {
     // --- STANDARD E-COMMERCE CATALOG METHODS ---
 
     handleStandardFilter() {
+        const clean = (v)=>{
+            const s = (v||'').toString().trim();
+            const l = s.toLowerCase();
+            return (l === 'all products' || l === 'any') ? '' : s;
+        };
+        const canonCategory = (s)=>{
+            const l = (s||'').toLowerCase();
+            if (!l) return '';
+            if (l.includes('cctv')) return 'CCTV';
+            if (l.includes('alarm')) return 'Alarm';
+            if (l.includes('access')) return 'Access';
+            if (l.includes('comm') || l.includes('radio')) return 'Comm';
+            return s;
+        };
+        const canonUse = (s)=>{
+            const l = (s||'').toLowerCase();
+            if (!l) return '';
+            if (l.includes('home') || l.includes('residential')) return 'Residential';
+            if (l.includes('small')) return 'Small Business';
+            if (l.includes('commercial') || l.includes('industrial')) return 'Commercial';
+            return s;
+        };
+        const canonTier = (s)=>{
+            const l = (s||'').toLowerCase();
+            if (!l) return '';
+            if (l.includes('economy')) return 'Economy';
+            if (l.includes('mid')) return 'Mid-Range';
+            if (l.includes('premium')) return 'Premium';
+            return s;
+        };
         const filters = {
-            category: document.getElementById('category-filter')?.value,
-            useCase: document.getElementById('usecase-filter')?.value,
-            priceTier: document.getElementById('price-filter')?.value,
-            searchTerm: document.getElementById('search-input')?.value.toLowerCase() || '',
+            category: canonCategory(clean(document.getElementById('category-filter')?.value)),
+            useCase: canonUse(clean(document.getElementById('usecase-filter')?.value)),
+            priceTier: canonTier(clean(document.getElementById('price-filter')?.value)),
+            searchTerm: ((document.getElementById('search-input')?.value) || '').toLowerCase().trim(),
         };
         this.catalogPage = 1;
-        this.lastFilteredProducts = this.filterProducts(filters);
         this.renderCatalog();
     }
 
@@ -566,18 +595,58 @@ class LogicDrivenApp {
         const catalogListEl = document.getElementById('catalog-list');
         if (!catalogListEl) return;
 
+        const clean = (v)=>{
+            const s = (v||'').toString().trim();
+            const l = s.toLowerCase();
+            return (l === 'all products' || l === 'any') ? '' : s;
+        };
+        const canonCategory = (s)=>{
+            const l = (s||'').toLowerCase();
+            if (!l) return '';
+            if (l.includes('cctv')) return 'CCTV';
+            if (l.includes('alarm')) return 'Alarm';
+            if (l.includes('access')) return 'Access';
+            if (l.includes('comm') || l.includes('radio')) return 'Comm';
+            return s;
+        };
+        const canonUse = (s)=>{
+            const l = (s||'').toLowerCase();
+            if (!l) return '';
+            if (l.includes('home') || l.includes('residential')) return 'Residential';
+            if (l.includes('small')) return 'Small Business';
+            if (l.includes('commercial') || l.includes('industrial')) return 'Commercial';
+            return s;
+        };
+        const canonTier = (s)=>{
+            const l = (s||'').toLowerCase();
+            if (!l) return '';
+            if (l.includes('economy')) return 'Economy';
+            if (l.includes('mid')) return 'Mid-Range';
+            if (l.includes('premium')) return 'Premium';
+            return s;
+        };
         const filters = {
-            category: document.getElementById('category-filter')?.value,
-            useCase: document.getElementById('usecase-filter')?.value,
-            priceTier: document.getElementById('price-filter')?.value,
-            searchTerm: document.getElementById('search-input')?.value?.toLowerCase() || ''
+            category: canonCategory(clean(document.getElementById('category-filter')?.value)),
+            useCase: canonUse(clean(document.getElementById('usecase-filter')?.value)),
+            priceTier: canonTier(clean(document.getElementById('price-filter')?.value)),
+            searchTerm: ((document.getElementById('search-input')?.value) || '').toLowerCase().trim()
         };
 
-        const baseProducts = this.lastFilteredProducts || this.filterProducts(filters);
-        const products = Array.isArray(baseProducts) ? baseProducts : [];
+        let products = this.filterProducts(filters) || [];
+        // Failsafe: if no filters are applied and nothing returned, show full list
+        const noFilters = !filters.category && !filters.useCase && !filters.priceTier && !filters.searchTerm;
+        if (noFilters && products.length === 0) {
+            products = Array.isArray(this.PRODUCTS) ? this.PRODUCTS.slice() : [];
+        }
         this.lastFilteredProducts = products;
 
-        const total = Array.isArray(products) ? products.length : 0;
+        let total = Array.isArray(products) ? products.length : 0;
+        if (total === 0 && noFilters && Array.isArray(this.PRODUCTS) && this.PRODUCTS.length > 0) {
+            // Secondary failsafe: render full catalog to avoid blank screen
+            products = this.PRODUCTS.slice();
+            this.lastFilteredProducts = products;
+            total = products.length;
+        }
         const pageSize = this.catalogPageSize;
         const totalPages = Math.max(1, Math.ceil(total / pageSize));
         const page = Math.min(this.catalogPage, totalPages);
@@ -607,13 +676,26 @@ class LogicDrivenApp {
     }
 
     filterProducts(filters) {
-        return this.PRODUCTS.filter(product => {
-            let match = true;
-            if (filters.category && product.type !== filters.category) match = false;
-            if (filters.useCase && product.useCase !== filters.useCase) match = false;
-            if (filters.priceTier && product.priceTier !== filters.priceTier) match = false;
-            if (filters.searchTerm && (!product.name.toLowerCase().includes(filters.searchTerm) && !product.id.toLowerCase().includes(filters.searchTerm))) match = false;
-            return match;
+        const norm = (v)=> (v||'').toString().toLowerCase().trim();
+        const fc = norm(filters.category);
+        const fu = norm(filters.useCase);
+        const fp = norm(filters.priceTier);
+        const fs = norm(filters.searchTerm);
+        if (!fc && !fu && !fp && !fs) {
+            return Array.isArray(this.PRODUCTS) ? this.PRODUCTS.slice() : [];
+        }
+        return this.PRODUCTS.filter(prod => {
+            const type = norm(prod.type);
+            const use = norm(prod.useCase);
+            const tier = norm(prod.priceTier);
+            const name = norm(prod.name);
+            const id = norm(prod.id);
+            const desc = norm(prod.description);
+            if (fc && !type.includes(fc)) return false;
+            if (fu && !use.includes(fu)) return false;
+            if (fp && !tier.includes(fp)) return false;
+            if (fs && !(name.includes(fs) || id.includes(fs) || desc.includes(fs))) return false;
+            return true;
         });
     }
 
