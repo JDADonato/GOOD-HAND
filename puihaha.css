@@ -1,0 +1,499 @@
+/* Global Reset and Font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Disable animated underline on nav link hover */
+.nav-link::before { display: none !important; content: none !important; }
+
+/* Contact page: ensure high contrast inside the gradient address block */
+.from-primary.to-secondary p { color: #e6eefb !important; }
+.from-primary.to-secondary .font-bold { color: #ffffff !important; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    color: #1a202c;
+    line-height: 1.6;
+}
+
+/* Custom Color Definitions */
+:root {
+    --color-primary: #0e2378;
+    --color-secondary: #193893;
+    --color-cta-red: #D60000;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-cta-yellow: #ffc107;
+    --color-success: #10B981;
+    --color-error: #EF4444;
+    --color-warning: #F59E0B;
+    --color-info: #3B82F6;
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.16);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Utility Classes */
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-cta-yellow { color: var(--color-cta-yellow); }
+.text-cta-red { color: var(--color-cta-red); }
+.bg-cta-red { background-color: var(--color-cta-red); }
+
+/* Enhanced Shadows */
+.shadow-lg { 
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-smooth);
+}
+
+.shadow-lg:hover {
+    box-shadow: var(--shadow-strong);
+    transform: translateY(-2px);
+}
+
+.shadow-2xl { 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Custom Scrollbar */
+.scroll-hidden::-webkit-scrollbar { 
+    width: 8px;
+}
+
+.scroll-hidden::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.scroll-hidden::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+    border-radius: 10px;
+}
+
+.scroll-hidden::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+/* Enhanced Navigation Styles */
+nav {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 2px solid rgba(14, 35, 120, 0.1);
+}
+
+/* Dark nav surface */
+body.dark nav {
+    background: rgba(6,10,20,0.6) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.nav-link {
+    padding: 0.5rem 0;
+    border-bottom: 3px solid transparent;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color-cta-red);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::before {
+    transform: translateX(0);
+}
+
+.nav-link.active-nav {
+    border-bottom-color: var(--color-cta-red);
+    font-weight: 700;
+    color: var(--color-cta-red) !important;
+}
+
+/* Contrast tweaks for text on light surfaces */
+.text-gray-700 { color: #374151 !important; }
+.text-gray-600 { color: #475569 !important; }
+.text-gray-500 { color: #64748b !important; }
+
+/* Accessible default link colors */
+a { color: var(--color-secondary); text-decoration: none; }
+/* Force high-contrast hover color to avoid white-on-white issues */
+a:hover { color: var(--color-cta-red) !important; text-decoration: underline; }
+
+/* Ensure outline-style buttons with white borders remain readable when hovered to white backgrounds */
+.border-white:hover { color: var(--color-secondary) !important; }
+
+/* Ensure submit buttons are visible with solid backgrounds even without Tailwind utilities */
+[type="submit"] {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Enhanced Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+    z-index: 9999 !important;
+}
+
+/* Ensure stacking order: product detail > inquiry > advisor */
+#advisor-modal { z-index: 10000 !important; }
+#inquiry-form-modal { z-index: 10001 !important; }
+#product-detail-modal { z-index: 10002 !important; }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content { 
+    background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+    color: var(--color-black);
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 100px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(214, 0, 0, 0.15);
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 2px solid rgba(214, 0, 0, 0.2);
+    position: relative;
+    z-index: 10000 !important;
+}
+
+/* Keep modal header visible while scrolling content */
+.modal-content > .flex:first-child {
+    position: sticky;
+    top: 0;
+    background: inherit;
+    z-index: 5;
+    margin-left: -4px; /* subtle cover for borders */
+    margin-right: -4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/* Product modal: specs grid */
+.specs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px 16px;
+}
+
+@media (min-width: 640px) {
+    .specs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.spec-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+
+.spec-label {
+    font-weight: 700;
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+}
+
+.spec-value {
+    justify-self: end;
+    text-align: right;
+    color: #111827;
+    font-weight: 600;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-button {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #9ca3af;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.close-button:hover {
+    color: var(--color-cta-red);
+    background: rgba(214, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+
+/* Position modal close buttons at upper-right for both sizes */
+.modal-content-lg .close-button,
+.modal-content .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 28px;
+}
+
+/* Enhanced Product Cards */
+.product-card {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-cta-red));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.product-card:hover::before {
+    transform: scaleX(1);
+}
+
+.product-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.catalog-card {
+    border-top: 4px solid var(--color-secondary);
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+}
+
+.catalog-card:hover {
+    border-top-color: var(--color-cta-red);
+    background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+}
+
+/* Sticky filters panel on large screens */
+.filters-sticky { position: sticky; top: 96px; }
+
+/* Catalog pagination buttons */
+.page-btn {
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-primary);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+.page-btn:hover { background: #f8fafc; border-color: var(--color-secondary); }
+.page-btn.active { background: var(--color-secondary); color: #ffffff; border-color: var(--color-secondary); box-shadow: 0 6px 18px rgba(25,56,147,0.25); }
+.page-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Enhanced Form Inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    transition: var(--transition-smooth);
+    border: 2px solid #e5e7eb;
+    background: white;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(25, 56, 147, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Modal Form Styles */
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="tel"],
+.modal-content textarea {
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+    color: #6b7280;
+    opacity: 1;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="email"]:focus,
+.modal-content input[type="tel"]:focus,
+.modal-content textarea:focus {
+    background: white;
+    border-color: #193893;
+    box-shadow: 0 0 0 3px rgba(25, 56, 147, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Ensure submit buttons have visible backgrounds even if utility classes fail */
+#contact-form button[type="submit"],
+#inquiry-form button[type="submit"] {
+    background: var(--color-cta-red) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+#contact-form button[type="submit"]:hover,
+#inquiry-form button[type="submit"]:hover {
+    background: #b00000 !important;
+}
+
+/* Advisor modal option buttons - ensure high-contrast on hover */
+#advisor-modal #quiz-container button {
+    border: 2px solid var(--color-secondary);
+    background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+    color: var(--color-primary);
+}
+#advisor-modal #quiz-container button:hover {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%) !important;
+    color: #ffffff !important;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    #floating-advisor,
+    #toast-container,
+    nav {
+        display: none !important;
+    }
+}
+
+/* Dark Mode Overrides */
+body.dark {
+    background: linear-gradient(135deg, #0b1020 0%, #0f1724 100%);
+    color: #e6eefb;
+}
+
+/* Neutral surfaces used to be white; in dark mode make them dark-gray */
+body.dark .bg-white,
+body.dark .modal-content,
+body.dark .modal-content-lg,
+body.dark .catalog-card,
+body.dark .product-card {
+    background-color: #0f1724 !important;
+    color: #e6eefb !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Text adjustments for elements that used gray on light background */
+body.dark .text-gray-700 { color: #cbd5e1 !important; }
+body.dark .text-gray-500 { color: #94a3b8 !important; }
+body.dark .text-black { color: #e6eefb !important; }
+
+/* Adjust primary text when placed on dark surfaces to remain legible */
+body.dark .text-primary { color: #bcd0ff !important; }
+body.dark .text-secondary { color: #9fb3ff !important; }
+
+/* CTA colors - keep same red/yellow for contrast */
+body.dark .bg-cta-red { background-color: var(--color-cta-red) !important; }
+body.dark .text-cta-red { color: var(--color-cta-red) !important; }
+body.dark .bg-cta-yellow { background-color: var(--color-cta-yellow) !important; }
+
+/* Toasts: make them darker on dark mode for consistency */
+body.dark #toast-container .toast { background: rgba(20,24,35,0.95); color: #e6eefb; border: 1px solid rgba(255,255,255,0.04); }
+body.dark #toast-container .toast .toast-title { color: #f1f5f9; }
+
+/* Scrollbar tweaks for dark mode */
+body.dark .scroll-hidden::-webkit-scrollbar-track { background: #0b1220; }
+body.dark .scroll-hidden::-webkit-scrollbar-thumb { background: var(--color-secondary); }
+
+/* Product card hover in dark mode */
+body.dark .catalog-card:hover, body.dark .product-card:hover { box-shadow: 0 12px 30px rgba(2,6,23,0.6); transform: translateY(-6px); }
+
+/* Make modal backdrops slightly lighter for contrast on dark background */
+body.dark .modal-overlay { background-color: rgba(2,6,23,0.85); }
+
+/* Dark-mode product page improvements */
+body.dark .catalog-card {
+    border-top: 4px solid rgba(25,56,147,0.6);
+    background: linear-gradient(135deg, #0f1724 0%, #0b1220 100%);
+}
+
+body.dark .catalog-card .text-cta-red { color: var(--color-cta-red) !important; }
+
+/* Slightly more pronounced product image area */
+body.dark .product-card img { background: linear-gradient(135deg,#0b1220,#111827); padding: 6px; border-radius: 8px; }
+
+/* Make CTA buttons stand out on dark backgrounds */
+body.dark .bg-cta-red, body.dark .bg-cta-yellow { box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+
+/* Ensure card descriptions remain legible */
+body.dark .product-card .text-sm { color: #94a3b8 !important; }
+
+/* small pulse used when a duplicate toast is detected */
+.pulse-dup { animation: pulse-dup 0.6s ease-in-out; }
+@keyframes pulse-dup {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-4px) scale(1.02); }
+    100% { transform: translateY(0) scale(1); }
+}
+
